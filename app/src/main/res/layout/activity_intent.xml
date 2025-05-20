@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_intent">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <Button
+            android:id="@+id/btn_call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="전화걸기"
+            android:onClick="onClicked_intent"/>
+
+        <Button
+            android:id="@+id/btn_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="지도보기"
+            android:onClick="onClicked_intent"/>
+
+        <Button
+            android:id="@+id/btn_web"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="웹브라우저"
+            android:onClick="onClicked_intent"/>
+
+        <Button
+            android:id="@+id/btn_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="연락처보기"
+            android:onClick="onClicked_intent"/>
+
+        <Button
+            android:id="@+id/btn_memo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메모"
+            android:onClick="onClicked_intent"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
