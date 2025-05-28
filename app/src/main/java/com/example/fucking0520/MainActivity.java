@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
         //launcher
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -83,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nextregisterpage(View view) {
-
+        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+        startActivity(intent);
     }
 }

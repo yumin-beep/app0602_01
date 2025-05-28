@@ -23,15 +23,24 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-        R_id = findViewById(R.id.tvregisterid);
-        R_pw = findViewById(R.id.tvregisterpw);
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_register);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.register), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+        R_id = findViewById(R.id.registerid);
+        R_pw = findViewById(R.id.registerpw);
         r_completebtn = findViewById(R.id.registercompletebutton);
 
 
     }
     public void onRegisterComplete(View v) {
+
         String inputId = R_id.getText().toString();
         String inputPw = R_pw.getText().toString();
 
