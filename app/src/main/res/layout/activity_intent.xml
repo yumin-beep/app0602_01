@@ -60,28 +60,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClicked_intent"
-            android:text="위치" />
+            android:text="위치 추적 시작" />
 
         <Button
             android:id="@+id/btn_counttime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClicked_intent"
-            android:text="머문 시간 체크" />
+            android:text="누적 시간 보기" />
 
         <TextView
             android:id="@+id/tv_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="현재 위치: 알 수 없음" />
+            android:text="현재 위치: 기다리는 중..." />
 
         <TextView
             android:id="@+id/ct_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:text="누적된 시간: 알 수 없음" />
+            android:text="누적 시간: 0초" />
+
+        <ProgressBar
+            android:id="@+id/progress_time"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_gravity="center"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:progress="0"
+            android:max="100"
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
