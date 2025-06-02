@@ -57,8 +57,13 @@ public class IntentActivity extends AppCompatActivity {
         tvLocation = findViewById(R.id.tv_location);
         ctTime = findViewById(R.id.ct_time);
         btnMe = findViewById(R.id.btn_me);
-        prefs = getSharedPreferences("location_timer", MODE_PRIVATE);
         progressBar = findViewById(R.id.progress_time);
+        SharedPreferences loginPrefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String userId = loginPrefs.getString("logged_in_id", "default_user");
+
+        // ✅ 유저별 SharedPreferences 지정
+        prefs = getSharedPreferences("location_timer_" + userId, MODE_PRIVATE);
+
 
         updateTrackingButton();
     }

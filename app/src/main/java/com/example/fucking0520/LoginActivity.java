@@ -36,9 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     public void check(View v){
         Intent intent = new Intent();
         if(isUserValid(id, password)){
+            // 🔥 로그인 성공 시 현재 로그인한 유저 ID 저장
+            SharedPreferences loginPrefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+            loginPrefs.edit().putString("logged_in_id", id).apply();
+
             intent.putExtra("status", "로그인성공");
-        }
-        else{
+        } else {
             intent.putExtra("status","로그인실패");
         }
 
@@ -48,9 +51,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean isUserValid(String username, String password){
         SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
-        String savedId = prefs.getString("saved_id", "");
-        String savedPw = prefs.getString("saved_pw", "");
+        String savedPw = prefs.getString("user_" + username + "_pw", "");
 
-        return username.equals(savedId) && password.equals(savedPw);
+        if (username.equals("") || !password.equals(savedPw)) return false;
+
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("logged_in_id", username);  // 로그인한 유저 저장
+        editor.apply();
+
+        return true;
     }
 }

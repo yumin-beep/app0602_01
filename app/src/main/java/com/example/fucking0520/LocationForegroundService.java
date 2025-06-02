@@ -30,7 +30,9 @@ public class LocationForegroundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        SharedPreferences loginPrefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
+        String userId = loginPrefs.getString("logged_in_id", "default_user");
+        prefs = getSharedPreferences("location_timer_" + userId, MODE_PRIVATE);
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         loadAnchor();
         startForegroundServiceNotif();

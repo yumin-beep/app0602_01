@@ -46,8 +46,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("saved_id", inputId);
-        editor.putString("saved_pw", inputPw);
+
+        editor.putString("user_" + inputId + "_pw", inputPw);
         editor.apply();
 
         Toast.makeText(this, "회원가입 완료", Toast.LENGTH_SHORT).show();
