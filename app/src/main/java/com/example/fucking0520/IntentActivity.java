@@ -1,4 +1,4 @@
-// ✅ IntentActivity.java (토글 방식으로 위치 추적 시작/중단 및 시간 리셋)
+// ✅ IntentActivity.java (유저별 업적 저장 연동 포함)
 package com.example.fucking0520;
 
 import android.Manifest;
@@ -37,9 +37,10 @@ public class IntentActivity extends AppCompatActivity {
     private TextView tvLocation;
     private TextView ctTime;
     private Button btnMe;
-    private SharedPreferences prefs;
-
     private ProgressBar progressBar;
+
+    private SharedPreferences prefs;
+    private String currentUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +59,12 @@ public class IntentActivity extends AppCompatActivity {
         ctTime = findViewById(R.id.ct_time);
         btnMe = findViewById(R.id.btn_me);
         progressBar = findViewById(R.id.progress_time);
-        SharedPreferences loginPrefs = getSharedPreferences("UserInfo", MODE_PRIVATE);
-        String userId = loginPrefs.getString("logged_in_id", "default_user");
 
-        // ✅ 유저별 SharedPreferences 지정
-        prefs = getSharedPreferences("location_timer_" + userId, MODE_PRIVATE);
+        // 유저 정보 받아오기
+        SharedPreferences userInfo = getSharedPreferences("CurrentUser", MODE_PRIVATE);
+        currentUsername = userInfo.getString("current_username", "default_user");
 
+        prefs = getSharedPreferences("location_timer_" + currentUsername, MODE_PRIVATE);
 
         updateTrackingButton();
     }
@@ -163,15 +164,15 @@ public class IntentActivity extends AppCompatActivity {
         long minutes = totalSec / 60;
         long seconds = totalSec % 60;
 
-        // 게이지 계산
-        final int MAX_MINUTES = 10;
-        float ratio = Math.min(1f, totalSec / 600f); // 600초가 최대치
+        final int MAX_SECONDS = 600;
+        float ratio = Math.min(1f, totalSec / (float) MAX_SECONDS);
         int percent = Math.round(ratio * 100);
 
         progressBar.setProgress(percent);
 
         if (ratio >= 1f) {
             ctTime.setText("🎉 미션 클리어!");
+            AchievementManager.saveAchievement(this, currentUsername, "mission_1", true);
         } else {
             ctTime.setText("누적 시간: " + minutes + "분 " + seconds + "초 (" + percent + "%)");
         }
